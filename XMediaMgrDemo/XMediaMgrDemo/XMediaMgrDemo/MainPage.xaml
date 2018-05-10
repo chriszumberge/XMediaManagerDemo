@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:XMediaMgrDemo.Behaviors"
+             xmlns:cvt="clr-namespace:XMediaMgrDemo.Converters"
+             xmlns:local="clr-namespace:XMediaMgrDemo"
+             Title="Select Video"
+             x:Class="XMediaMgrDemo.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <cvt:ItemTappedEventArgsToItemConverter x:Key="ItemTappedConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ListView IsPullToRefreshEnabled="False"
+              ItemsSource="{Binding Videos}"
+              HasUnevenRows="False">
+        <ListView.Behaviors>
+            <b:ListViewItemTappedBehavior Command="{Binding SelectVideoCommand}" Converter="{StaticResource ItemTappedConverter}" />
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Label Text="{Binding Title}" VerticalTextAlignment="Center" />
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
